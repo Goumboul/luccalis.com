@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../lib/content';
+
+const posts = await getPosts('deep-dive');
+---
+
+<Base title="Deep dives" description="Long pieces on how database internals work.">
+  <h1>Deep dives</h1>
+  <p class="lede">Long pieces where I take one part of a database apart and explain how it works.</p>
+  {
+    posts.length > 0 ? (
+      <PostList posts={posts} />
+    ) : (
+      <p class="muted">
+        The first one will follow my SQLite clone in C, from the REPL to the B-tree. Until then, the{' '}
+        <a href="/notes/">notes</a> are where things happen.
+      </p>
+    )
+  }
+</Base>
+
+<style>
+  .lede {
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+</style>

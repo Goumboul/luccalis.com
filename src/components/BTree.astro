@@ -1,0 +1,220 @@
+---
+/*
+  Site navigation drawn as a B+tree: one internal node whose separator keys
+  (d, n, r) route to four leaf pages, sorted alphabetically and chained
+  left to right like real B+tree leaves.
+*/
+interface Leaf {
+  href: string;
+  label: string;
+  detail: string;
+}
+interface Props {
+  leaves: [Leaf, Leaf, Leaf, Leaf];
+}
+const { leaves } = Astro.props;
+
+const SLOT = 28;
+const ROOT_X = 242;
+const ROOT_Y = 8;
+const ROOT_H = 42;
+const LEAF_W = 146;
+const LEAF_GAP = 32;
+const LEAF_Y = 122;
+const LEAF_H = 64;
+
+const keys = ['d', 'n', 'r'];
+const pointerX = [0, 2, 4, 6].map((i) => ROOT_X + i * SLOT + SLOT / 2);
+const keyX = [1, 3, 5].map((i) => ROOT_X + i * SLOT + SLOT / 2);
+const leafX = [0, 1, 2, 3].map((i) => i * (LEAF_W + LEAF_GAP));
+---
+
+<figure class="btree">
+  <svg viewBox="0 0 680 192" role="group" aria-labelledby="btree-caption">
+    <defs>
+      <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0,0 L8,4 L0,8 z" class="arrowhead"></path>
+      </marker>
+    </defs>
+
+    <g aria-hidden="true">
+      <rect class="node" x={ROOT_X} y={ROOT_Y} width={SLOT * 7} height={ROOT_H} rx="4"></rect>
+      {[1, 2, 3, 4, 5, 6].map((i) => (
+        <line class="divider" x1={ROOT_X + i * SLOT} y1={ROOT_Y} x2={ROOT_X + i * SLOT} y2={ROOT_Y + ROOT_H} />
+      ))}
+      {pointerX.map((x) => <circle class="pointer" cx={x} cy={ROOT_Y + ROOT_H / 2} r="3.5" />)}
+      {keys.map((k, i) => (
+        <text class="key" x={keyX[i]} y={ROOT_Y + ROOT_H / 2 + 5} text-anchor="middle">{k}</text>
+      ))}
+      {pointerX.map((x, i) => (
+        <path class="edge draw" d={`M${x},${ROOT_Y + ROOT_H / 2} L${leafX[i] + LEAF_W / 2},${LEAF_Y}`} />
+      ))}
+      {[0, 1, 2].map((i) => (
+        <line
+          class="sibling draw"
+          x1={leafX[i] + LEAF_W + 4}
+          y1={LEAF_Y + LEAF_H / 2}
+          x2={leafX[i + 1] - 4}
+          y2={LEAF_Y + LEAF_H / 2}
+          marker-end="url(#arrow)"
+        />
+      ))}
+    </g>
+
+    {leaves.map((leaf, i) => (
+      <a href={leaf.href} class="leaf">
+        <rect class="node" x={leafX[i]} y={LEAF_Y} width={LEAF_W} height={LEAF_H} rx="4" />
+        <text class="label" x={leafX[i] + 14} y={LEAF_Y + 27}>{leaf.label}</text>
+        <text class="detail" x={leafX[i] + 14} y={LEAF_Y + 49}>{leaf.detail}</text>
+      </a>
+    ))}
+  </svg>
+
+  <ol class="fallback">
+    {leaves.map((leaf) => (
+      <li>
+        <a href={leaf.href}>
+          <span class="label">{leaf.label}</span>
+          <span class="detail">{leaf.detail}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+
+  <figcaption id="btree-caption">
+    This site, as a B+tree. The root routes by first letter, and the leaves are chained in order.
+  </figcaption>
+</figure>
+
+<style>
+  .btree {
+    margin: 3.5rem 0 4.5rem;
+  }
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .node {
+    fill: var(--ink-raised);
+    stroke: var(--rule);
+    stroke-width: 1.25;
+  }
+  .divider {
+    stroke: var(--rule);
+    stroke-width: 1.25;
+  }
+  .pointer {
+    fill: var(--elephant);
+  }
+  .key {
+    fill: var(--text);
+    font-family: var(--mono);
+    font-size: 15px;
+  }
+  .edge,
+  .sibling {
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 1.25;
+  }
+  .arrowhead {
+    fill: var(--muted);
+  }
+  .leaf {
+    text-decoration: none;
+  }
+  .leaf .label {
+    fill: var(--text);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .leaf .detail {
+    fill: var(--muted);
+    font-family: var(--sans);
+    font-size: 13px;
+  }
+  .leaf:hover .node,
+  .leaf:focus-visible .node {
+    stroke: var(--elephant);
+    fill: var(--elephant-soft);
+  }
+  .leaf:focus-visible {
+    outline: none;
+  }
+  .leaf:focus-visible .node {
+    stroke-width: 2;
+  }
+
+  /* one load moment: the edges draw themselves from root to leaves */
+  .draw {
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: draw 0.9s cubic-bezier(0.3, 0.7, 0.2, 1) 0.15s forwards;
+  }
+  .sibling.draw {
+    animation-delay: 0.8s;
+  }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .draw {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  figcaption {
+    margin-top: 1.25rem;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: var(--step--1);
+  }
+
+  .fallback {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (max-width: 34rem) {
+    svg,
+    figcaption {
+      display: none;
+    }
+    .fallback {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .fallback li {
+      margin: 0;
+    }
+    .fallback a {
+      display: flex;
+      flex-direction: column;
+      padding: 0.8rem 0.9rem;
+      background: var(--ink-raised);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      text-decoration: none;
+      font-family: var(--sans);
+      line-height: 1.35;
+    }
+    .fallback .label {
+      font-weight: 600;
+    }
+    .fallback .detail {
+      color: var(--muted);
+      font-size: var(--step--1);
+    }
+    .fallback a:hover {
+      border-color: var(--elephant);
+    }
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { formatDate } from '../lib/content';
+
+const books = (await getCollection('reading')).sort((a, b) => {
+  if (a.data.status !== b.data.status) return a.data.status === 'reading' ? -1 : 1;
+  return (b.data.finished?.valueOf() ?? 0) - (a.data.finished?.valueOf() ?? 0);
+});
+const rendered = await Promise.all(books.map(async (b) => ({ book: b, ...(await render(b)) })));
+---
+
+<Base title="Reading" description="Books I'm reading or have read, with my notes.">
+  <h1>Reading</h1>
+  <p class="lede">What I'm reading, and what I kept from it.</p>
+  {
+    rendered.length === 0 ? (
+      <p class="muted">No books yet. Notes will show up here as I finish them.</p>
+    ) : (
+      <ul class="books">
+        {rendered.map(({ book, Content }) => (
+          <li>
+            <details>
+              <summary>
+                <span class="title">{book.data.title}</span>
+                <span class="meta">
+                  {book.data.author}.{' '}
+                  {book.data.status === 'reading'
+                    ? 'Reading now.'
+                    : book.data.finished
+                      ? `Finished ${formatDate(book.data.finished)}.`
+                      : 'Read.'}
+                </span>
+              </summary>
+              <div class="notes">
+                <Content />
+              </div>
+            </details>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</Base>
+
+<style>
+  .lede {
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+  .books {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .books li {
+    border-top: 1px solid var(--rule);
+    margin: 0;
+  }
+  .books li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+  summary {
+    cursor: pointer;
+    padding: 1.1rem 0;
+    font-family: var(--sans);
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  summary:hover .title {
+    color: var(--elephant);
+  }
+  .meta {
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+  .notes {
+    padding-bottom: 1rem;
+  }
+</style>

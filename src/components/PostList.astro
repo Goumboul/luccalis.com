@@ -1,0 +1,78 @@
+---
+import { formatDate, type Post } from '../lib/content';
+
+interface Props {
+  posts: Post[];
+  showKind?: boolean;
+}
+const { posts, showKind = false } = Astro.props;
+---
+
+<ul class="posts">
+  {
+    posts.map((post) => (
+      <li>
+        <a href={`/writing/${post.id}/`}>
+          <span class="title">{post.data.title}</span>
+          <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        </a>
+        <p class="desc">
+          {showKind && <span class="kind">{post.data.kind === 'note' ? 'Note' : 'Deep dive'}. </span>}
+          {post.data.description}
+          {post.data.draft && <span class="draft"> (draft)</span>}
+        </p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+  li + li {
+    margin-top: 0;
+  }
+  a {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    text-decoration: none;
+    font-family: var(--sans);
+  }
+  .title {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  a:hover .title {
+    color: var(--elephant);
+  }
+  time {
+    color: var(--muted);
+    font-size: var(--step--1);
+    font-variant-numeric: tabular-nums;
+  }
+  .desc {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+  .kind {
+    color: var(--text);
+  }
+  .draft {
+    color: var(--elephant);
+  }
+</style>

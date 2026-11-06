@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import BTree from '../components/BTree.astro';
+import PostList from '../components/PostList.astro';
+import { getCollection } from 'astro:content';
+import { getPosts, plural } from '../lib/content';
+
+const posts = await getPosts();
+const notes = posts.filter((p) => p.data.kind === 'note');
+const dives = posts.filter((p) => p.data.kind === 'deep-dive');
+const books = await getCollection('reading');
+---
+
+<Base>
+  <h1>Lucca Lisciati&#8209;Ghazinia</h1>
+  <p class="intro">
+    I'm a software engineering student in Toulouse, learning how databases work from the inside:
+    PostgreSQL, storage engines, and a SQLite clone I'm writing in C. This is where I write down what I
+    learn.
+  </p>
+
+  <BTree
+    leaves={[
+      { href: '/about/', label: 'About', detail: 'Who I am' },
+      { href: '/deep-dives/', label: 'Deep dives', detail: plural(dives.length, 'piece') },
+      { href: '/notes/', label: 'Notes', detail: plural(notes.length, 'note') },
+      { href: '/reading/', label: 'Reading', detail: plural(books.length, 'book') },
+    ]}
+  />
+
+  <h2>Latest</h2>
+  {posts.length > 0 ? <PostList posts={posts.slice(0, 6)} showKind /> : <p class="muted">The first note is on its way.</p>}
+</Base>
+
+<style>
+  h1 {
+    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  .intro {
+    font-size: 1.15rem;
+    max-width: 36rem;
+  }
+  h2 {
+    font-size: var(--step-1);
+    margin: 0 0 0.5rem;
+  }
+</style>

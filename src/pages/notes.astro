@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../lib/content';
+
+const posts = await getPosts('note');
+---
+
+<Base title="Notes" description="Short notes on things I learned about databases, usually the hard way.">
+  <h1>Notes</h1>
+  <p class="lede">Short write-ups of one thing I learned, usually from a bug or a failing test.</p>
+  {posts.length > 0 ? <PostList posts={posts} /> : <p class="muted">No notes yet.</p>}
+</Base>
+
+<style>
+  .lede {
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+</style>

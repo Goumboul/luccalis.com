@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../consts';
+---
+
+<Base title="About" description="Who I am and why I'm going deep on databases.">
+  <h1>About</h1>
+  <div class="prose">
+    <p>
+      I'm Lucca, a third-year student at Epitech in Toulouse. I spent four years building web apps: React and
+      Next.js on the front, Node.js and Laravel on the back, PostgreSQL underneath. I also ran a small
+      freelance business making websites for local businesses, and interned at a fintech company where I
+      worked on Laravel and on data pipelines in Databricks.
+    </p>
+    <p>
+      Somewhere along the way, the part I liked most stopped being the interface and became the database
+      under it. So I'm leaving web development behind and specialising in databases, starting with
+      PostgreSQL.
+    </p>
+    <h2>What I'm working on</h2>
+    <ul>
+      <li>A SQLite clone in C, following the cstack tutorial and splitting it into a real codebase.</li>
+      <li>Contributing to <a href="https://github.com/dalibo/pg_activity">pg_activity</a>, Dalibo's top-like tool for PostgreSQL.</li>
+      <li>Data by Story, a series of interviews with engineers who build and run databases.</li>
+    </ul>
+    <h2>Elsewhere</h2>
+    <p>
+      Code is on <a href={SITE.github}>GitHub</a>, and I post shorter thoughts on <a href={SITE.x}>X</a>.
+    </p>
+  </div>
+</Base>

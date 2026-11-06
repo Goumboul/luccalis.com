@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import { render } from 'astro:content';
+import { getPosts, formatDate, type Post } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Post };
+const { Content } = await render(post);
+const { title, description, date, updated, kind, tags } = post.data;
+const back = kind === 'note' ? { href: '/notes/', label: 'All notes' } : { href: '/deep-dives/', label: 'All deep dives' };
+---
+
+<Base title={title} description={description}>
+  <article>
+    <header>
+      <h1>{title}</h1>
+      <p class="meta">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        {updated && <span>, updated <time datetime={updated.toISOString()}>{formatDate(updated)}</time></span>}
+        {tags.length > 0 && <span class="tags">{tags.map((t) => `#${t}`).join(' ')}</span>}
+      </p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+  <p class="back"><a href={back.href}>{back.label}</a></p>
+</Base>
+
+<style>
+  header {
+    margin-bottom: 2.5rem;
+  }
+  h1 {
+    font-size: clamp(1.9rem, 5.5vw, 2.6rem);
+    margin-bottom: 0.75rem;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: var(--step--1);
+    margin: 0;
+  }
+  .tags {
+    color: var(--elephant);
+  }
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+  .back {
+    margin-top: 4rem;
+    font-family: var(--sans);
+    font-size: var(--step--1);
+  }
+</style>
