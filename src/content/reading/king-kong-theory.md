@@ -4,16 +4,16 @@ author: Virginie Despentes
 status: read
 ---
 
-a short essay, half autobiography, half theory. despentes writes about women who don't fit what society expects a woman to be. she talks about her own experience of rape, about sex work and porn, and about how both men and women are stuck in roles they didn't choose.
+King Kong Theory is a short essay. It is half autobiography and half theory. Virginie Despentes writes about women who don't fit what society expects from a woman. She talks about being raped, about her time as a sex worker, and about porn. She also shows that men and women are both stuck in roles they didn't choose.
 
-i wanted to read it for two things: how it breaks down gender norms, and its feminism, radical but inclusive.
+I wanted to read it because it questions gender norms, and because its feminism is radical but includes everyone.
 
-the line that stuck with me is the opening:
+The book opens with this sentence:
 
 > « J'écris de chez les moches, pour les moches, les frigides, les mal baisées, les imbaisables, toutes les exclues du grand marché à la bonne meuf. »
 
-roughly: "i write from the ugly ones' side, for the ugly ones", for every woman left out of the "market" of desirable women. it shocks you on first read. then it makes you realise how much other people's judgment weighs on us, and how much our words hurt.
+In English, it means something like: "I write as one of the ugly ones, for the ugly ones", and for all the women who are left out because they don't match what men are supposed to want. The sentence shocked me the first time I read it. Then it made me realise how much other people's judgment affects us, and how much our words can hurt.
 
-what surprised me most is that she's not ashamed of anything. she talks about sex work and the men she slept with for money without any regret, and she doesn't let anyone make her feel like a victim.
+What surprised me the most is that she is not ashamed of anything. She talks about sex work and about the men who paid her, and she doesn't regret it. She refuses to be seen as a victim.
 
-i'd recommend it to everyone, men and women. it's about all of us, the people who suffer from it and the people who do it. it opens your mind about how women are seen in society.
+I would recommend this book to everyone, men and women. The topic concerns all of us: the people who are judged and the people who judge. It changed the way I see how women are treated in society.
