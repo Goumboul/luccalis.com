@@ -32,7 +32,6 @@ const nav = [
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -57,9 +56,6 @@ const nav = [
     <main id="main" class="wrap">
       <slot />
     </main>
-    <footer class="wrap site-footer">
-      <a href="/rss.xml">rss</a>
-    </footer>
   </body>
 </html>
 
@@ -106,20 +102,5 @@ const nav = [
   }
   main {
     min-height: 60vh;
-  }
-  .site-footer {
-    display: flex;
-    gap: 1.25rem;
-    padding-top: 5rem;
-    padding-bottom: 3rem;
-    font-family: var(--sans);
-    font-size: var(--step--1);
-  }
-  .site-footer a {
-    color: var(--muted);
-    text-decoration: none;
-  }
-  .site-footer a:hover {
-    color: var(--text);
   }
 </style>
