@@ -10,12 +10,12 @@ const books = (await getCollection('reading')).sort((a, b) => {
 const rendered = await Promise.all(books.map(async (b) => ({ book: b, ...(await render(b)) })));
 ---
 
-<Base title="Reading" description="Books I'm reading or have read, with my notes.">
-  <h1>Reading</h1>
-  <p class="lede">What I'm reading, and what I kept from it.</p>
+<Base title="reading" description="Books I'm reading, with my notes.">
+  <h1>reading</h1>
+  <p class="lede">books i'm reading, with my notes.</p>
   {
     rendered.length === 0 ? (
-      <p class="muted">No books yet. Notes will show up here as I finish them.</p>
+      <p class="muted">nothing yet.</p>
     ) : (
       <ul class="books">
         {rendered.map(({ book, Content }) => (

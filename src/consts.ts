@@ -2,7 +2,7 @@ export const SITE = {
   name: 'Lucca Lisciati-Ghazinia',
   short: 'Lucca',
   description:
-    'Notes and deep dives on databases: PostgreSQL internals, storage engines, and the bugs that teach you how they work.',
+    'Notes on databases, mostly PostgreSQL.',
   github: 'https://github.com/Goumboul',
   x: 'https://x.com/LuccaLisciati',
 };

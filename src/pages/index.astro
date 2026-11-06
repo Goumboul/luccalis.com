@@ -1,49 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
-import BTree from '../components/BTree.astro';
 import PostList from '../components/PostList.astro';
-import { getCollection } from 'astro:content';
-import { getPosts, plural } from '../lib/content';
+import { getPosts } from '../lib/content';
+import { SITE } from '../consts';
 
 const posts = await getPosts();
-const notes = posts.filter((p) => p.data.kind === 'note');
-const dives = posts.filter((p) => p.data.kind === 'deep-dive');
-const books = await getCollection('reading');
 ---
 
 <Base>
   <h1>Lucca Lisciati&#8209;Ghazinia</h1>
-  <p class="intro">
-    I'm a software engineering student in Toulouse, learning how databases work from the inside:
-    PostgreSQL, storage engines, and a SQLite clone I'm writing in C. This is where I write down what I
-    learn.
+
+  <h2>some things about me</h2>
+  <ul>
+    <li>20, student at Epitech in Toulouse</li>
+    <li>did web dev for 4 years, now going all in on databases</li>
+    <li>writing a SQLite clone in C to understand how it works</li>
+    <li>contributing to <a href="https://github.com/dalibo/pg_activity">pg_activity</a></li>
+    <li>interviewing database engineers for Data by Story</li>
+  </ul>
+
+  <h2>writing</h2>
+  {posts.length > 0 ? <PostList posts={posts} /> : <p class="muted">nothing yet.</p>}
+
+  <p class="find">
+    find me on <a href={SITE.github}>github</a> and <a href={SITE.x}>x</a>.
   </p>
-
-  <BTree
-    leaves={[
-      { href: '/about/', label: 'About', detail: 'Who I am' },
-      { href: '/deep-dives/', label: 'Deep dives', detail: plural(dives.length, 'piece') },
-      { href: '/notes/', label: 'Notes', detail: plural(notes.length, 'note') },
-      { href: '/reading/', label: 'Reading', detail: plural(books.length, 'book') },
-    ]}
-  />
-
-  <h2>Latest</h2>
-  {posts.length > 0 ? <PostList posts={posts.slice(0, 6)} showKind /> : <p class="muted">The first note is on its way.</p>}
 </Base>
 
 <style>
-  h1 {
-    font-size: clamp(2.2rem, 7vw, 3.4rem);
-    line-height: 1.05;
-    margin-bottom: 1.5rem;
-  }
-  .intro {
-    font-size: 1.15rem;
-    max-width: 36rem;
-  }
-  h2 {
-    font-size: var(--step-1);
-    margin: 0 0 0.5rem;
+  .find {
+    margin-top: 3rem;
   }
 </style>

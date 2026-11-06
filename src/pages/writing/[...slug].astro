@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props as { post: Post };
 const { Content } = await render(post);
 const { title, description, date, updated, kind, tags } = post.data;
-const back = kind === 'note' ? { href: '/notes/', label: 'All notes' } : { href: '/deep-dives/', label: 'All deep dives' };
+const back = kind === 'note' ? { href: '/notes/', label: 'all notes' } : { href: '/deep-dives/', label: 'all deep dives' };
 ---
 
 <Base title={title} description={description}>
@@ -36,7 +36,7 @@ const back = kind === 'note' ? { href: '/notes/', label: 'All notes' } : { href:
     margin-bottom: 2.5rem;
   }
   h1 {
-    font-size: clamp(1.9rem, 5.5vw, 2.6rem);
+    font-size: var(--step-3);
     margin-bottom: 0.75rem;
   }
   .meta {

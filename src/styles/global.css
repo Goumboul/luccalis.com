@@ -1,7 +1,4 @@
-/*
-  Ink-blue night: a dark page tinted toward PostgreSQL's blue rather than neutral black.
-  Serif for reading, grotesk for structure, mono only for real code.
-*/
+/* One serif for everything, mono only for code. */
 :root {
   --ink: #0f1621;
   --ink-raised: #172130;
@@ -12,17 +9,17 @@
   --elephant-soft: rgba(134, 173, 224, 0.14);
 
   --serif: 'Literata Variable', Georgia, serif;
-  --sans: 'Schibsted Grotesk Variable', system-ui, sans-serif;
+  --sans: var(--serif);
   --mono: 'JetBrains Mono Variable', ui-monospace, monospace;
 
   /* type scale, ratio 1.25 */
   --step--1: 0.85rem;
   --step-0: 1.0625rem;
-  --step-1: 1.33rem;
-  --step-2: 1.66rem;
-  --step-3: 2.4rem;
+  --step-1: 1.2rem;
+  --step-2: 1.35rem;
+  --step-3: 1.6rem;
 
-  --measure: 40rem;
+  --measure: 36rem;
   --gutter: clamp(1rem, 4vw, 2rem);
 
   color-scheme: dark;
@@ -61,12 +58,10 @@ h4 {
   font-family: var(--sans);
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.015em;
-  margin: 2.2em 0 0.6em;
+  margin: 2em 0 0.6em;
 }
 h1 {
   font-size: var(--step-3);
-  letter-spacing: -0.03em;
   margin-top: 0;
 }
 h2 {

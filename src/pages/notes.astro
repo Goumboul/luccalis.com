@@ -6,10 +6,10 @@ import { getPosts } from '../lib/content';
 const posts = await getPosts('note');
 ---
 
-<Base title="Notes" description="Short notes on things I learned about databases, usually the hard way.">
-  <h1>Notes</h1>
-  <p class="lede">Short write-ups of one thing I learned, usually from a bug or a failing test.</p>
-  {posts.length > 0 ? <PostList posts={posts} /> : <p class="muted">No notes yet.</p>}
+<Base title="notes" description="Short things I learned about databases.">
+  <h1>notes</h1>
+  <p class="lede">short things i learned, usually from a bug.</p>
+  {posts.length > 0 ? <PostList posts={posts} /> : <p class="muted">nothing yet.</p>}
 </Base>
 
 <style>
