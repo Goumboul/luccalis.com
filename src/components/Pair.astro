@@ -1,0 +1,21 @@
+<div class="pair">
+  <slot />
+</div>
+
+<style>
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .pair :global(.figure) {
+    margin: 0;
+  }
+  @media (max-width: 640px) {
+    .pair {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

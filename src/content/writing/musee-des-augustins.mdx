@@ -6,21 +6,33 @@ kind: note
 tags: ["toulouse", "museums", "off-topic"]
 ---
 
+import Figure from '../../components/Figure.astro';
+import Pair from '../../components/Pair.astro';
+import newEntrance from './images/new-entrance.jpg';
+import ticket from './images/ticket.jpg';
+import romanesqueRoom from './images/romanesque-room.jpg';
+import darcyStaircase from './images/darcy-staircase.jpg';
+import redGallery from './images/red-gallery.jpg';
+import sculpturePainting from './images/sculpture-painting.jpg';
+import cloisterGarden from './images/cloister-garden.jpg';
+import cloisterArcade from './images/cloister-arcade.jpg';
+
 Not a database post this time. I moved to Toulouse in September and I still hadn't visited the city's big art museum, so I finally went to the Musée des Augustins.
 
 Some context: the museum was closed from 2019 to December 2025 for a huge renovation. It's set up in an old Augustinian convent from the 14th century, and it's been a museum since 1795, just two years after the Louvre. So it's old. Very old.
 
 ## The new entrance
 
-![The new white stone entrance of the museum](./images/new-entrance.jpg)
-
 The first thing you see is the new entrance, designed by the architects Aires Mateus. It's a big white stone wall with a slanted opening cut into it, right next to the old brick building. I like the contrast a lot. It looks super modern but it doesn't fight with the rest.
 
-![My ticket](./images/ticket.jpg)
+<Pair>
+  <Figure src={newEntrance} alt="The new white stone entrance of the museum" caption="The new entrance" />
+  <Figure src={ticket} alt="My ticket" caption="My ticket" />
+</Pair>
 
 ## The Romanesque room
 
-![The Romanesque room with Jorge Pardo's colored lamps](./images/romanesque-room.jpg)
+<Figure src={romanesqueRoom} alt="The Romanesque room with Jorge Pardo's colored lamps" caption="Jorge Pardo's lamps in the Romanesque room" variant="wide" />
 
 This was my favorite room, by far. It's full of Romanesque capitals (the carved stone blocks at the top of columns). They're around 1,000 years old and come from old Toulouse cloisters that don't exist anymore, like the ones at Saint-Sernin and La Daurade.
 
@@ -28,25 +40,26 @@ The crazy part is how it's displayed. In 2014 the artist Jorge Pardo redid the w
 
 ## Going upstairs
 
-![The Darcy staircase](./images/darcy-staircase.jpg)
-
 To get to the painting galleries you take the big staircase. Brick walls, white stone arches, sculptures on the railings. Honestly I spent almost as much time looking at the building as at the art.
 
-![The main painting gallery with red walls](./images/red-gallery.jpg)
+<Pair>
+  <Figure src={darcyStaircase} alt="The Darcy staircase" caption="The Darcy staircase" />
+  <Figure src={redGallery} alt="The main painting gallery with red walls" caption="The main painting gallery" />
+</Pair>
 
 Upstairs there are two big painting rooms with red walls and glass ceilings that let natural light in. The paintings are huge, some of them cover almost the whole wall, and there are sculptures everywhere in the middle of the room.
 
-![A sculpture in front of a painting](./images/sculpture-painting.jpg)
+<Figure src={sculpturePainting} alt="A sculpture in front of a painting" caption="A sculpture in front of a painting" variant="contain" />
 
 This combo stopped me for a while: a white marble sculpture of a woman lying down with a small winged creature on her, in front of a dark painting full of tigers, birds and people in chaos. Pretty dark mood, but I loved it.
 
 ## The cloister
 
-![The cloister garden](./images/cloister-garden.jpg)
+<Figure src={cloisterGarden} alt="The cloister garden" caption="The cloister garden" />
 
 The last part is the cloister. Some of it is still under scaffolding (the restoration is supposed to go until spring 2027), but the garden is open. Cypress trees, plants in big pots, a few chairs. It's calm, and it feels weird to be in the middle of the city and not hear it.
 
-![The cloister arcade](./images/cloister-arcade.jpg)
+<Figure src={cloisterArcade} alt="The cloister arcade" caption="The cloister arcade" variant="contain" />
 
 Walking under the arcades with the small double columns, you get a pretty good idea of what the place was like when it was still a convent.
 
