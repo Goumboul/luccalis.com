@@ -54,6 +54,17 @@ const back = kind === 'note' ? { href: '/notes/', label: 'all notes' } : { href:
   .prose :global(h2:first-child) {
     margin-top: 0;
   }
+  .prose :global(p:has(> img)) {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  .prose :global(img) {
+    display: block;
+    width: auto;
+    max-width: min(100%, 24rem);
+    height: auto;
+    margin: 0 auto;
+  }
   .back {
     margin-top: 4rem;
     font-family: var(--sans);
